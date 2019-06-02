@@ -36,5 +36,4 @@ public class ProductServiceImpl extends GenericServiceImpl<Product> implements P
 		product.setSellerId(sellerId);
 		return super.edit(product);
 	}
-	
 }

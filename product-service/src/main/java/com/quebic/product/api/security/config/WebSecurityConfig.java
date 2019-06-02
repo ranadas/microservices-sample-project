@@ -1,5 +1,8 @@
 package com.quebic.product.api.security.config;
 
+import com.quebic.common.model.Permission;
+import com.quebic.common.security.CommonAuthenticationEntryPoint;
+import com.quebic.common.security.CommonAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,10 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.quebic.common.model.Permission;
-import com.quebic.common.security.CommonAuthenticationEntryPoint;
-import com.quebic.common.security.CommonAuthenticationTokenFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -41,11 +40,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                
+
                 .antMatchers(HttpMethod.GET, "/products/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/products/**").hasRole(Permission.USER_SELLER)
-				.antMatchers(HttpMethod.PUT, "/products/**").hasRole(Permission.USER_SELLER)
-                
+                .antMatchers(HttpMethod.PUT, "/products/**").hasRole(Permission.USER_SELLER)
+
                 //authenticated requests
                 .anyRequest().authenticated();
 
@@ -56,5 +55,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // disable page caching
         httpSecurity.headers().cacheControl();
     }
-    
+
 }

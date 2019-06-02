@@ -1,8 +1,8 @@
 package com.quebic.auth.api.config;
 
 import java.util.Map;
-import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
+//import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
+//import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.cache.CacheManager;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -25,19 +25,19 @@ import com.quebic.common.sse.SseConfig;
 @Import({AsyncConfig.class, SseConfig.class, DaoConfig.class, CacheConfig.class})
 public class AppConfiguration {
 
-	@Bean
-	public ErrorAttributes errorAttributes() {
-	    
-		return new DefaultErrorAttributes(){
-	    	@Override
-	        public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes, boolean includeStackTrace) {
-	            Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
-	            errorAttributes.remove("exception");
-	            return errorAttributes;
-	        }
-	    };
-	    
-	}
+//	@Bean
+//	public ErrorAttributes errorAttributes() {
+//
+//		return new DefaultErrorAttributes(){
+//	    	@Override
+//	        public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes, boolean includeStackTrace) {
+//	            Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
+//	            errorAttributes.remove("exception");
+//	            return errorAttributes;
+//	        }
+//	    };
+//
+//	}
 	
 	@Bean
     public PasswordEncoder loadPasswordEncoder() {
@@ -66,7 +66,8 @@ public class AppConfiguration {
         		, "RoleDaoImpl"
         		, "PermissionDaoImpl");
     }
-	
+
+//	from Spring Cloud starter
 	@LoadBalanced
 	@Bean
 	public RestTemplate restTemplate() {
