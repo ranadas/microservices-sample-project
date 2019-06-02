@@ -1,44 +1,45 @@
 package com.quebic.auth.api.security;
 
-import java.util.Collection;
-import java.util.Date;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quebic.auth.api.model.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Date;
 
 public class JwtUser implements UserDetails {
 
-	private static final long serialVersionUID = -1728234246191170692L;
-	
-	private User user;
+    private static final long serialVersionUID = -1728234246191170692L;
+
+    private User user;
     private final Collection<? extends GrantedAuthority> authorities;
     private final boolean enabled;
 
     public JwtUser(
-    		User user
-			, Collection<? extends GrantedAuthority> authorities
-			, boolean enabled) {
-		
-    	this.user = user;
-		this.authorities = authorities;
-		this.enabled = enabled;
-		
-	}
+            User user
+            , Collection<? extends GrantedAuthority> authorities
+            , boolean enabled) {
+
+        this.user = user;
+        this.authorities = authorities;
+        this.enabled = enabled;
+
+    }
 
     public User getDbUser() {
-		return user;
-	}
-    
+        return user;
+    }
+
     public Date getLastPasswordResetDate() {
         return user.getLastPasswordResetDate();
     }
 
-	@Override
+    @Override
     public String getUsername() {
         return user.getEmail();
     }
-    
+
     @JsonIgnore
     @Override
     public String getPassword() {
@@ -72,5 +73,5 @@ public class JwtUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
-    
+
 }
